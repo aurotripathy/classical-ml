@@ -1,2 +1,2 @@
 docs
-[also](/docs/adaboost.jpg)
+[algo](docs/adaboost.jpg)
