@@ -72,9 +72,6 @@ class AdaBoost:
         return np.sign(np.dot(self.stump_weights, stump_preds))
 
 
-
-
-
 X, y = make_toy_dataset(n=10, random_seed=10)
 plot_adaboost(X, y, plotfile='plot1.png')
 
@@ -86,5 +83,14 @@ plot_adaboost(X, y, bench, plotfile='plot-bench.png')
 clf = AdaBoost().fit(X, y, iterations=10)
 plot_adaboost(X, y, clf, plotfile='plot-scratch.png')
 
+train_err = (clf.predict(X) != y).mean()
+print(f'Train error: {train_err:.1%}')
+
+# Visualizing our learner step-by-step
+# Since we saved all intermediate variables as arrays to our fitted model, we can use the function below to visualize how our ensemble learner evolves at each iteration :
+
+# The left column shows the “stump” weak learner selected, which corresponds to h(x) at  time-step t
+# The right column shows the cumulative strong learner so far: H(x)
+# The size of the data point markers reflects their relative weighting. Data points misclassified in the previous iteration will be more heavily weighted—and therefore appear larger—in the next iteration.
 clf = AdaBoost().fit(X, y, iterations=10)
 plot_staged_adaboost(X, y, clf, plotfile='staged-plot.png')
